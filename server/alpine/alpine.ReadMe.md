@@ -23,7 +23,7 @@ export DOCKER_PWD=actual_password
 
 3. Execute `01_alpine-init.sh`
     1. Open vim using `vim 01_alpine-init.sh` and press insert key for entering into Insert mode.
-    2. Copy Paste content of script `01_alpine-init.sh` into vim and press escape to get out of Insert mode.
+    2. Copy Paste content of script `01_alpine-init.sh` into vim (use Shift + Insert) and press escape to get out of Insert mode.
     3. Save the file using :wq > Enter
     4. Make file executable `chmod +x ./01_alpine-init.sh`
     5. Execute script `./01_alpine-init.sh`
