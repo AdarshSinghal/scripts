@@ -13,18 +13,18 @@
 
 
 ### Steps to be followed
-1. Connect the alpine server from putty
-2. Copy Paste content of script 1 in terminal to execute them.
-3. Execute `docker login -u {username}`
-4. Provide token generated from DockerHub. (Can use account password, but it's unsecure way)
-5. Execute `docker pull {username}/as-pvt-repo:postgres-alpine3.18`
 
-### Script 1
+1. Connect the alpine server from putty
+2. Provide correct value to DOCKER_USER and DOCKER_PWD variable and execute.
 ```
-apk add git
-mkdir /usr/local/git-repo
-cd /usr/local/git-repo
-git clone https://github.com/AdarshSinghal/scripts.git
-chmod +x ./scripts/server/alpine-init.sh
-./scripts/server/alpine-init.sh
+export DOCKER_USER=actual_username
+export DOCKER_PWD=actual_password
 ```
+
+3. Execute `01_alpine-init.sh`
+    1. Open vim using `vim 01_alpine-init.sh` and press insert key for entering into Insert mode.
+    2. Copy Paste content of script `01_alpine-init.sh` into vim and press escape to get out of Insert mode.
+    3. Save the file using :wq > Enter
+    4. Make file executable `chmod +x ./01_alpine-init.sh`
+    5. Execute script `./01_alpine-init.sh`
+
