@@ -11,14 +11,20 @@
 - Steps for manual and automation setup will evolve.
 - Hence, it's better to manage it with VCS.
 
-### Script
+
+### Steps to be followed
+1. Connect the alpine server from putty
+2. Copy Paste content of script 1 in terminal to execute them.
+3. Execute `docker login -u {username}`
+4. Provide token generated from DockerHub. (Can use account password, but it's unsecure way)
+5. Execute `docker pull {username}/as-pvt-repo:postgres-alpine3.18`
+
+### Script 1
 ```
 apk add git
 mkdir /usr/local/git-repo
 cd /usr/local/git-repo
 git clone https://github.com/AdarshSinghal/scripts.git
-chmod +x ./scripts/server/alpine.sh
-./scripts/server/alpine.sh
+chmod +x ./scripts/server/alpine-init.sh
+./scripts/server/alpine-init.sh
 ```
-### Steps to be followed
-After connecting the alpine server from putty, start executing the commands in above script.
