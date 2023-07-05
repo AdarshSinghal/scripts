@@ -7,7 +7,7 @@ WORK_DIR=/usr/local/git-repo
 #---------------------------------------------------------------------
 
 apk add git
-mkdir $WORK_DIR
+mkdir -p $WORK_DIR
 cd $WORK_DIR
 git clone $GIT_REPO_URL
 chmod +x ./$BASE_PATH/docker-install.sh
