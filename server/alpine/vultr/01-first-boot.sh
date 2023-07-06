@@ -22,4 +22,3 @@ mkdir -p $WORK_DIR
 cd $WORK_DIR || exit
 git clone $GIT_REPO_URL
 chmod +x ./$BASE_PATH/02-docker-cmd.sh
-cd $BASE_PATH
