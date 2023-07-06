@@ -14,4 +14,4 @@ git clone $GIT_REPO_URL
 chmod +x ./$BASE_PATH/docker-install.sh
 ./$BASE_PATH/docker-install.sh
 chmod +x ./$BASE_PATH/docker-init.sh
-./$BASE_PATH/docker-init.sh
+./$BASE_PATH/docker-init.sh $1 $2
