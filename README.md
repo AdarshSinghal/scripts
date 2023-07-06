@@ -25,10 +25,10 @@ This repository contains scripts for initializing the provisioned cloud resource
 ### Steps to be followed
 
 1. Connect the alpine server from putty
-2. Provide correct value to DOCKER_USER and DOCKER_PWD variable and execute.
+2. Provide correct value to DOCKER_USERNAME and DOCKER_PASSWORD variable and execute.
 ```
-export DOCKER_USER=actual_username
-export DOCKER_PWD=actual_password
+export DOCKER_USERNAME=actual_username
+export DOCKER_PASSWORD=actual_password
 ```
 
 #### Terminal only
