@@ -31,6 +31,7 @@ export DOCKER_USER=actual_username
 export DOCKER_PWD=actual_password
 ```
 
+#### Terminal only
 3. Execute `01_alpine-init.sh`
     1. Open vim using `vim 01_alpine-init.sh` and press insert key for entering into Insert mode.
     2. Copy Paste content of script `01_alpine-init.sh` into vim (use Shift + Insert) and press escape to get out of Insert mode.
@@ -38,9 +39,12 @@ export DOCKER_PWD=actual_password
     4. Make file executable `chmod +x ./01_alpine-init.sh`
     5. Execute script `./01_alpine-init.sh`
 
-### FTP Client usage
-- It can help to skip vim part mentioned in step 3 (3.1 to 3.3)
-- However I mentioned vim shortcuts as server setup is rare event.
+#### Terminal + Winscp
+3. Execute `01_alpine-init.sh`
+    1. Connect Winscp to server and copy `./01_alpine-init.sh`
+    2. Right click on file and choose Properties
+    3. Provide executable permission to owner, group and others.
+    4. In putty terminal, execute the script.
 
 ### Can it be simplified further?
 Yes, In GCP, there is provision to provide startup script. That means above mentioned manual steps is not required as script is provided in instance configuration itself. However, some cloud providers don't have this flexibility and there are other factors such as pricing is involved while choosing cloud providers.
