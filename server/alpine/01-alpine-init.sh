@@ -11,7 +11,7 @@ apk add git
 mkdir -p $WORK_DIR
 cd $WORK_DIR || exit
 git clone $GIT_REPO_URL
-chmod +x ./$BASE_PATH/01-docker-install.sh
+chmod +x ./$BASE_PATH/02-docker-install.sh
 ./$BASE_PATH/docker-install.sh
-chmod +x ./$BASE_PATH/02-docker-cmd.sh
+chmod +x ./$BASE_PATH/03-docker-cmd.sh
 ./$BASE_PATH/docker-init.sh
