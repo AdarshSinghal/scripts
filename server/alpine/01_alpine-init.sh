@@ -1,3 +1,4 @@
+#!/bin/bash
 # Make sure to read ReadMe before executing this file.
 
 #--Local variables----------------------------------------------------
@@ -8,7 +9,7 @@ WORK_DIR=/usr/local/git-repo
 
 apk add git
 mkdir -p $WORK_DIR
-cd $WORK_DIR
+cd $WORK_DIR || exit
 git clone $GIT_REPO_URL
 chmod +x ./$BASE_PATH/docker-install.sh
 ./$BASE_PATH/docker-install.sh
