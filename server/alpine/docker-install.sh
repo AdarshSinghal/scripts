@@ -1,11 +1,12 @@
 #!/bin/bash
-sleep 5
 apk add docker
-sleep 5
-sudo rc-update add docker default
-sleep 5
-sudo service docker start
-sleep 5
-sudo rc-update add cgroups
-sleep 5
-sudo apk add docker-compose
+rc-update add docker default
+
+mount -t tmpfs cgroup_root /sys/fs/cgroup
+mkdir /sys/fs/cgroup/devices
+mount -o devices cgroup -t cgroup /sys/fs/cgroup/devices
+dockerd &
+#service docker start
+
+rc-update add cgroups
+apk add docker-compose
