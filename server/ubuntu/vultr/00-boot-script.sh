@@ -20,6 +20,8 @@ SCRIPT_2=$SCRIPT_PATH/02-docker-cmd.sh
 
 chmod +x $SCRIPT_1
 $SCRIPT_1
+export DOCKER_USERNAME=
+export DOCKER_PASSWORD=
 chmod +x $SCRIPT_2
 $SCRIPT_2
 #-----------------------------------------------------
