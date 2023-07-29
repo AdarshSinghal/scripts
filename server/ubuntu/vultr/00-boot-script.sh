@@ -15,7 +15,7 @@ git clone https://github.com/AdarshSinghal/scripts.git
 
 #Local variables
 SCRIPT_PATH=$WORK_DIR/scripts/server/ubuntu/vultr
-SCRIPT_1=$SCRIPT_PATH/01-first-boot.sh
+SCRIPT_1=$SCRIPT_PATH/01-install-docker.sh
 SCRIPT_2=$SCRIPT_PATH/02-docker-cmd.sh
 
 chmod +x $SCRIPT_1
