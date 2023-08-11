@@ -3,8 +3,8 @@
 . ~/.bashrc
 
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Started executing installation-jenkins-nginx.sh" >> "$INSTALLATION_LOG_FILE"
-echo "$(date +'%Y-%m-%d %H:%M:%S') - Installing curl" >> "$INSTALLATION_LOG_FILE"
-sudo apt-get curl -y
+echo "$(date +'%Y-%m-%d %H:%M:%S') - Installing curl ufw" >> "$INSTALLATION_LOG_FILE"
+sudo apt-get curl ufw -y
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Using curl for retrieving jenkins pkg" >> "$INSTALLATION_LOG_FILE"
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -21,3 +21,9 @@ echo "$(date +'%Y-%m-%d %H:%M:%S') - Installing nginx" >> "$INSTALLATION_LOG_FIL
 sudo apt install nginx -y
 sudo ufw allow 'Nginx HTTP'
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Finished installing jenkins and nginx" >> "$INSTALLATION_LOG_FILE"
+
+echo "******$(date +'%Y-%m-%d %H:%M:%S') - Inside installation-jenkins-nginx ENV_SCRIPT_DIR - $ENV_SCRIPT_DIR." >> "$INSTALLATION_LOG_FILE"
+SCRIPT_CONFIG_JENKINS_NGINX=$SCRIPTS_DIR/server/ubuntu/native/nnt/config-jenkins-nginx.sh
+chmod +x "$SCRIPT_CONFIG_JENKINS_NGINX"
+echo "$(date +'%Y-%m-%d %H:%M:%S') - Executing $SCRIPT_CONFIG_JENKINS_NGINX" >> "$INSTALLATION_LOG_FILE"
+source "$SCRIPT_CONFIG_JENKINS_NGINX"
