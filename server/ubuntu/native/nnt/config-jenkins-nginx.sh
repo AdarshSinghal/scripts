@@ -36,4 +36,6 @@ else
     } >> $JENKINS_SERVICE_D/override.conf
   fi
 fi
+echo "$(date +'%Y-%m-%d %H:%M:%S') - Restarting jenkins" >> "$INSTALLATION_LOG_FILE"
+sudo systemctl restart jenkins
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Finished executing config-jenkins-nginx.sh" >> "$INSTALLATION_LOG_FILE"
