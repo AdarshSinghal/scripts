@@ -14,3 +14,8 @@ SCRIPT_JENKINS_NGINX_INSTALL=$ENV_SCRIPT_DIR/installation-jenkins-nginx.sh
 chmod +x "$SCRIPT_JENKINS_NGINX_INSTALL"
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Executing $SCRIPT_JENKINS_NGINX_INSTALL" >> "$INSTALLATION_LOG_FILE"
 source "$SCRIPT_JENKINS_NGINX_INSTALL"
+
+SCRIPT_POSTGRES_INSTALL=$ENV_SCRIPT_DIR/installation-postgresql.sh
+chmod +x "$SCRIPT_POSTGRES_INSTALL"
+echo "$(date +'%Y-%m-%d %H:%M:%S') - Executing $SCRIPT_POSTGRES_INSTALL" >> "$INSTALLATION_LOG_FILE"
+source "$SCRIPT_POSTGRES_INSTALL"
