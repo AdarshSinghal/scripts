@@ -1,6 +1,6 @@
 #!/bin/bash
-# Make sure to read ReadMe before executing this file.
 
+##### Started -> Logging setup #####
 LOG_DIR=/var/log/my_script_logs
 INSTALLATION_LOG_FILE=$LOG_DIR/installation.log
 
@@ -14,35 +14,37 @@ if ! grep -q "export LOG_DIR=$LOG_DIR" ~/.bashrc; then
 fi
 
 sudo mkdir $LOG_DIR
+##### Completed -> Logging setup #####
 
-echo "Starting script execution with apt update..." >> $INSTALLATION_LOG_FILE
+echo "Starting boot script execution with apt update." >> $INSTALLATION_LOG_FILE
 apt-get update
-echo "Installing git..." >> $INSTALLATION_LOG_FILE
+echo "After apt update, Installing git." >> $INSTALLATION_LOG_FILE
 apt-get install git -y
-echo "Installed git" >> $INSTALLATION_LOG_FILE
 
-WORK_DIR=/usr/local/git-repo
-if ! [ -d "$WORK_DIR" ]; then
-  mkdir -p $WORK_DIR
+SCRIPTS_DIR=/usr/local/git-repo/scripts
+echo "After installing git, checking whether dir $SCRIPTS_DIR exists." >> $INSTALLATION_LOG_FILE
+
+if ! [ -d "$SCRIPTS_DIR" ]; then
+  echo "Creating dir $SCRIPTS_DIR" >> $INSTALLATION_LOG_FILE
+  mkdir -p $SCRIPTS_DIR
 fi
-cd $WORK_DIR || exit
+cd $SCRIPTS_DIR || exit
+echo "Switched to dir $SCRIPTS_DIR." >> $INSTALLATION_LOG_FILE
 
-GIT_REPO=$WORK_DIR/scripts
-if [ -d "$GIT_REPO" ]; then
-    echo "Git repository already exists in $WORK_DIR." >> $INSTALLATION_LOG_FILE
-    cd "$GIT_REPO" || return
+if [ -d "$SCRIPTS_DIR/.git" ]; then
     git pull
-    echo "Git repository has been updated." >> $INSTALLATION_LOG_FILE
+    echo "Git repository inside $SCRIPTS_DIR has been updated." >> $INSTALLATION_LOG_FILE
 else
-    echo "Git repository does not exist in $WORK_DIR. Cloning..." >> $INSTALLATION_LOG_FILE
-    git clone https://github.com/AdarshSinghal/scripts.git "$WORK_DIR"
-    echo "Git repository has been cloned." >> $INSTALLATION_LOG_FILE
+    git clone https://github.com/AdarshSinghal/scripts.git "$SCRIPTS_DIR"
+    echo "Git repository has been cloned into $SCRIPTS_DIR" >> $INSTALLATION_LOG_FILE
 fi
 
-SCRIPT_DIR=$GIT_REPO/server/ubuntu/native/nnt
-SCRIPT_JDK_MVN_INSTALL=$SCRIPT_DIR/installation-jdk-mvn.sh
+ENV_SCRIPT_DIR=$SCRIPTS_DIR/server/ubuntu/native/nnt
 
-
+SCRIPT_JDK_MVN_INSTALL=$ENV_SCRIPT_DIR/installation-jdk-mvn.sh
+chmod +x $SCRIPT_JDK_MVN_INSTALL
+echo "Executing $SCRIPT_JDK_MVN_INSTALL" >> $INSTALLATION_LOG_FILE
+$SCRIPT_JDK_MVN_INSTALL
 
 
 
