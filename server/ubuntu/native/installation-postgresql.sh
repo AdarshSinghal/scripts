@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 LOG_DIR=/var/log/my_script_logs
 LOG_FILE="$LOG_DIR/postgres-installation.log"
 sudo mkdir $LOG_DIR
