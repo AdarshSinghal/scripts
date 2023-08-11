@@ -12,7 +12,7 @@ rm /etc/nginx/sites-enabled/default
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Restarting nginx" >> "$INSTALLATION_LOG_FILE"
 sudo systemctl restart nginx
 
-JENKINS_SERVICE_D=etc/systemd/system/jenkins.service.d
+JENKINS_SERVICE_D=/etc/systemd/system/jenkins.service.d
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Need to check whether $JENKINS_SERVICE_D exists" >> "$INSTALLATION_LOG_FILE"
 
 if ! [ -d "$JENKINS_SERVICE_D" ]; then
