@@ -1,4 +1,5 @@
 #!/bin/sh
+. ~/.bashrc
 echo "Installing openjdk-17-jdk maven" >> "$INSTALLATION_LOG_FILE"
 sudo apt install openjdk-17-jdk maven -y
 
