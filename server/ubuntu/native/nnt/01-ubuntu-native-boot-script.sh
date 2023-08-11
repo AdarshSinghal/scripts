@@ -60,4 +60,4 @@ fi
 SCRIPT_INSTALLATION=$SCRIPTS_DIR/server/ubuntu/native/nnt/installation.sh
 chmod +x $SCRIPT_INSTALLATION
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Executing $SCRIPT_INSTALLATION" >> $INSTALLATION_LOG_FILE
-$SCRIPT_INSTALLATION
+source $SCRIPT_INSTALLATION

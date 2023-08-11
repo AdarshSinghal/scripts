@@ -8,9 +8,9 @@ echo "$(date +'%Y-%m-%d %H:%M:%S') - Started executing installation.sh, which is
 SCRIPT_JDK_MVN_INSTALL=$ENV_SCRIPT_DIR/installation-jdk-mvn.sh
 chmod +x "$SCRIPT_JDK_MVN_INSTALL"
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Executing $SCRIPT_JDK_MVN_INSTALL" >> "$INSTALLATION_LOG_FILE"
-$SCRIPT_JDK_MVN_INSTALL
+source "$SCRIPT_JDK_MVN_INSTALL"
 
 SCRIPT_JENKINS_NGINX_INSTALL=$ENV_SCRIPT_DIR/installation-jenkins-nginx.sh
 chmod +x "$SCRIPT_JENKINS_NGINX_INSTALL"
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Executing $SCRIPT_JENKINS_NGINX_INSTALL" >> "$INSTALLATION_LOG_FILE"
-$SCRIPT_JENKINS_NGINX_INSTALL
+source "$SCRIPT_JENKINS_NGINX_INSTALL"
