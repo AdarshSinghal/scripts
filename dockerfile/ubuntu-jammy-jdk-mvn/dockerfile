@@ -1,0 +1,10 @@
+#This dockerfile depends on ubuntu-jammy/dockerfile image
+FROM ubuntu-jammy
+RUN apt-get update
+RUN apt-get install sudo openjdk-17-jdk maven -y
+
+RUN echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$JAVA_HOME/bin' >> ~/.bashrc
+RUN echo 'export MAVEN_HOME=/usr/share/maven' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$MAVEN_HOME/bin' >> ~/.bashrc
+RUN /bin/bash -c "source ~/.bashrc"
