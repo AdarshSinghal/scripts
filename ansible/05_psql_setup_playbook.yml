@@ -1,0 +1,47 @@
+---
+- name: Install PostgreSQL 15
+  hosts: nnt_env_server
+  vars:
+    remote_user: root
+    become: true
+
+  tasks:
+    - name: Create sources.list.d directory if not exists
+      file:
+        path: /etc/apt/sources.list.d
+        state: directory
+    - name: Create pgdg.list file
+      file:
+        path: /etc/apt/sources.list.d/pgdg.list
+        state: touch
+        
+    - name: Add PostgreSQL Repository
+      shell: sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+    - name: Import PostgreSQL Key
+      shell: wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+      
+
+    - name: Update APT Cache
+      apt:
+        update_cache: yes
+
+    - name: Install PostgreSQL 15
+      apt:
+        name: postgresql-15
+        state: present
+
+    - name: Update pg_hba.conf for ipv4
+      shell: echo 'host all all 0.0.0.0/0 md5' >> /etc/postgresql/15/main/pg_hba.conf
+
+    - name: Update pg_hba.conf for ipv6
+      shell: echo 'host all all ::0/0 md5' >> /etc/postgresql/15/main/pg_hba.conf
+
+    - name: Update postgresql.conf to whitelist all ip
+      shell: sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/15/main/postgresql.conf
+
+    - name: Restart Postgresql
+      shell: sudo systemctl restart postgresql
+
+    - name: Add ufw rule to allow port 5432
+      shell: sudo ufw allow 5432/tcp

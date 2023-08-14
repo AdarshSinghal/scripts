@@ -1,0 +1,26 @@
+---
+- name: Java Environment Setup
+  hosts: nnt_env_server
+  vars:
+    remote_user: root
+    become: true
+    JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
+
+  tasks:
+
+    - name: Install openjdk-17-jdk
+      apt:
+        name: openjdk-17-jdk
+        state: present
+
+    - name: Persist JAVA_HOME environment variable
+      lineinfile:
+        path: /etc/environment
+        regexp: '^JAVA_HOME='
+        line: 'JAVA_HOME={{ JAVA_HOME }}'
+
+    - name: Add JAVA_HOME/bin to PATH if not present
+      lineinfile:
+        path: /etc/environment
+        regexp: '^java-17-openjdk-amd64\/bin'
+        line: 'PATH="{{ JAVA_HOME }}/bin:{{ ansible_env.PATH }}"'

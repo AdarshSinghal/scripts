@@ -1,0 +1,34 @@
+---
+- name: Git Repository Management
+  hosts: nnt_env_server
+  vars:
+    remote_user: root
+    become: true
+    git_repo_path: /usr/local/git-repo/scripts
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "Hello, Ansible is performing Git Repository Management"
+
+    - name: Ensure git repo directory exists
+      file:
+        path: "{{ git_repo_path }}"
+        state: directory
+
+    - name: Check if git repo is cloned
+      stat:
+        path: "{{ git_repo_path }}/.git"
+      register: git_repo_status
+      ignore_errors: true
+
+    - name: Clone the git repository if it doesn't exist
+      git:
+        repo: "https://github.com/AdarshSinghal/scripts.git"
+        dest: "{{ git_repo_path }}"
+      when: git_repo_status.stat.exists == false
+
+    - name: Pull latest code if the git repository exists
+      command: git pull
+      args:
+        chdir: "{{ git_repo_path }}"
+      when: git_repo_status.stat.exists == true

@@ -1,0 +1,19 @@
+---
+- name: Simple Ansible Playbook
+  hosts: nnt_env_server
+  vars:
+    remote_user: root
+    become: true
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "Hello, Ansible is starting configuring the environment."
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Git
+      apt:
+        name: git
+        state: present
