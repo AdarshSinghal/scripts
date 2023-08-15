@@ -1,0 +1,32 @@
+---
+- name: Maven Environment Setup
+  hosts: nnt_env_server
+  vars:
+    remote_user: root
+    become: true
+    MAVEN_HOME: /usr/share/maven
+
+  tasks:
+
+    - name: Install maven
+      apt:
+        name: maven
+        state: present
+
+    - name: Persist MAVEN_HOME environment variable
+      lineinfile:
+        path: /etc/environment
+        regexp: '^MAVEN_HOME='
+        line: 'MAVEN_HOME={{ MAVEN_HOME }}'
+
+    - name: Persist M2_HOME environment variable
+      lineinfile:
+        path: /etc/environment
+        regexp: '^M2_HOME='
+        line: 'M2_HOME={{ MAVEN_HOME }}'    
+
+    - name: Add MAVEN_HOME/bin to PATH if not present
+      lineinfile:
+        path: /etc/environment
+        regexp: '^/usr/share/maven\/bin'
+        line: 'PATH="{{ MAVEN_HOME }}/bin:{{ ansible_env.PATH }}"'

@@ -1,0 +1,4 @@
+all:
+  hosts:
+    nnt_env_server:
+      ansible_host: 139.84.135.9

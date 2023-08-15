@@ -1,0 +1,23 @@
+---
+- name: Simple Ansible Playbook
+  hosts: nnt_env_server
+  vars:
+    remote_user: root
+    become: true
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "Hello, Ansible is starting configuring the environment."
+
+    - fail:
+        msg: "Environment variable PG_PASSWORD is not set in the jenkins/container. Please set it before running the playbook."
+      when: lookup('env', 'PG_PASSWORD')|length == 0
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Git
+      apt:
+        name: git
+        state: present

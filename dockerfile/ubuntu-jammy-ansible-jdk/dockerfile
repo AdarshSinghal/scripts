@@ -1,0 +1,24 @@
+FROM ubuntu:jammy
+
+# Install dependencies in a single layer
+RUN apt-get update && \
+    apt-get install -yq \
+    sudo \
+    apt-utils \
+    vim \
+    curl \
+    gpg \
+    unzip \
+    wget \
+    libcap2-bin \
+    ufw \
+    software-properties-common \
+    openjdk-17-jdk \
+    maven \
+    lsb-release && \
+    apt-get clean all &&  \
+    apt install software-properties-common -y && \
+    add-apt-repository --yes --update ppa:ansible/ansible && \
+    apt install ansible -yq && \
+    echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> /etc/environment && \
+    echo "MAVEN_HOME=/usr/share/maven" >> /etc/environment

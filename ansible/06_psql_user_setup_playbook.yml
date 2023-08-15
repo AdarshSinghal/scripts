@@ -1,0 +1,13 @@
+---
+- name: Reset PostgreSQL 15 password
+  hosts: nnt_env_server
+  vars:
+    remote_user: root
+    become: true
+  tasks:
+    - name: Execute PostgreSQL password reset script
+      shell: |
+        echo "#!/bin/bash" > /tmp/reset_pwd.sh
+        echo "sudo -u postgres psql -U postgres -d postgres -c \"alter user postgres with password '{{ lookup('env', 'PG_PASSWORD') }}'\"" >> /tmp/reset_pwd.sh
+        chmod +x /tmp/reset_pwd.sh
+        /tmp/reset_pwd.sh
