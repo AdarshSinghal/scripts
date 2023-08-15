@@ -1,0 +1,18 @@
+---
+- name: Nginx Setup Playbook
+  hosts: nnt_env_server
+  vars:
+    remote_user: root
+    become: true
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      tags: nginx
+
+    - name: Allow Nginx HTTP through UFW
+      ufw:
+        rule: allow
+        port: "Nginx HTTP"
+      tags: ufw
