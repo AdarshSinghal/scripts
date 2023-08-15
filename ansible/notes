@@ -4,4 +4,4 @@ ansible-playbook -i inventory.yml 03_jdk_setup_playbook.yml
 ansible-playbook -i inventory.yml 04_mvn_setup_playbook.yml
 ansible-playbook -i inventory.yml 05_psql_setup_playbook.yml
 ansible-playbook -i inventory.yml 06_psql_user_setup_playbook.yml
-06_psql_user_setup_playbook.yml
+ansible-playbook -i inventory.yml 07_nginx_setup_playbook.yml
