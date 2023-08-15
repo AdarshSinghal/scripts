@@ -2,3 +2,4 @@
 **/.terraform.**
 *.tfstate
 /terraform/vultr-instance-basic/terraform.tfstate.backup
+/.idea
