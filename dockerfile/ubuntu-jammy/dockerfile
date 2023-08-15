@@ -1,4 +1,16 @@
 FROM ubuntu:jammy
-RUN apt-get update
-RUN apt-get install sudo vim curl gpg unzip wget libcap2-bin ufw -y
-RUN apt-get update && apt-get install -y lsb-release && apt-get clean all
+
+# Install dependencies in a single layer
+RUN apt-get update && \
+    apt-get install -yq \
+    sudo \
+    apt-utils \
+    vim \
+    curl \
+    gpg \
+    unzip \
+    wget \
+    libcap2-bin \
+    ufw \
+    lsb-release && \
+    apt-get clean all

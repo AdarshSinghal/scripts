@@ -1,0 +1,3 @@
+docker run -it -v D:/Documents/Workspace/docker-desktop/volumes/ansible:/ansible -v D:/Documents/Workspace/docker-desktop/volumes/ansible/.ssh:/root/.ssh ansible:ubuntu /bin/sh
+
+docker run -it -v D:/Documents/Workspace/docker-desktop/volumes/ansible:/ansible -v D:/Documents/Workspace/docker-desktop/volumes/ansible/.ssh:/root/.ssh ansible:ubuntu /bin/shell
