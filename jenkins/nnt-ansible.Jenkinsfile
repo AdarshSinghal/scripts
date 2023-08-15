@@ -1,7 +1,16 @@
+def runAnsiblePlaybook(playbookName) {
+    sshagent(['nnt-env-ssh-credentials']) {
+        sh "ansible-playbook -i ${INVENTORY_FILE} ${PLAYBOOK_PATH}/${playbookName}"
+    }
+}
+
 pipeline {
     agent any
 
     environment {
+        ANSIBLE_PATH = '/ansible/git/nnt/scripts/ansible'
+        INVENTORY_FILE = '${ANSIBLE_PATH}/inventory.yml'
+        PLAYBOOK_PATH = '${ANSIBLE_PATH}/playbooks'
         PG_PASSWORD = credentials('NNT-PG-PASSWORD') // Use the appropriate credential ID
     }
 
@@ -10,10 +19,7 @@ pipeline {
         stage('Install Git') {
             steps {
                 script {
-                    def playbookName = '01_init_playbook.yml'
-                    sshagent(['nnt-env-ssh-credentials']) {
-                        sh "ansible-playbook -i /ansible/ansible/inventory.yml /ansible/ansible/playbooks/${playbookName}"
-                    }
+                    runAnsiblePlaybook('01_init_playbook.yml')
                 }
             }
         }
@@ -21,10 +27,7 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 script {
-                    def playbookName = '02_git_repo_playbook.yml'
-                    sshagent(['nnt-env-ssh-credentials']) {
-                        sh "ansible-playbook -i /ansible/ansible/inventory.yml /ansible/ansible/playbooks/${playbookName}"
-                    }
+                    runAnsiblePlaybook('02_git_repo_playbook.yml')
                 }
             }
         }
@@ -32,10 +35,7 @@ pipeline {
         stage('Set up JDK') {
             steps {
                 script {
-                    def playbookName = '03_jdk_setup_playbook.yml'
-                    sshagent(['nnt-env-ssh-credentials']) {
-                        sh "ansible-playbook -i /ansible/ansible/inventory.yml /ansible/ansible/playbooks/${playbookName}"
-                    }
+                    runAnsiblePlaybook('03_jdk_setup_playbook.yml')
                 }
             }
         }
@@ -43,10 +43,7 @@ pipeline {
         stage('Set up Maven') {
             steps {
                 script {
-                    def playbookName = '04_mvn_setup_playbook.yml'
-                    sshagent(['nnt-env-ssh-credentials']) {
-                        sh "ansible-playbook -i /ansible/ansible/inventory.yml /ansible/ansible/playbooks/${playbookName}"
-                    }
+                    runAnsiblePlaybook('04_mvn_setup_playbook.yml')
                 }
             }
         }
@@ -54,10 +51,7 @@ pipeline {
         stage('Set up Postgres') {
             steps {
                 script {
-                    def playbookName = '05_psql_setup_playbook.yml'
-                    sshagent(['nnt-env-ssh-credentials']) {
-                        sh "ansible-playbook -i /ansible/ansible/inventory.yml /ansible/ansible/playbooks/${playbookName}"
-                    }
+                    runAnsiblePlaybook('05_psql_setup_playbook.yml')
                 }
             }
         }
