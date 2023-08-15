@@ -1,0 +1,15 @@
+Need to mount these 2 volumes:-
+D:/Documents/Workspace/docker-desktop/volumes/nnt/ansible   |   /ansible          (Needed for storing playbooks)
+D:/Documents/Workspace/docker-desktop/volumes/nnt/.ssh      |   /root/.ssh        (Needed for storing ssh private key)
+
+
+docker run -it -v D:/Documents/Workspace/docker-desktop/volumes/ansible:/ansible -v D:/Documents/Workspace/docker-desktop/volumes/ansible/.ssh:/root/.ssh ansible:ubuntu /bin/sh
+
+
+Set up SSH agent (Execute following commands):-
+eval "$(ssh-agent -s)"
+ssh-add /root/.ssh/id_rsa
+
+Test the ansible working or not:-
+cd /ansible
+ansible-playbook -i inventory.yml 01_init_playbook.yml

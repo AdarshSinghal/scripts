@@ -1,7 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        PG_PASSWORD = credentials('NNT-PG-PASSWORD') // Use the appropriate credential ID
+    }
+
     stages {
+
         stage('Install Git') {
             steps {
                 script {
@@ -57,6 +62,21 @@ pipeline {
             }
         }
 
-        // Add more stages if needed...
+        stage('Reset Postgres Password') {
+            steps {
+                script {
+                    def scriptContent = """#!/bin/bash
+sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password '${PG_PASSWORD}'"
+"""
+                    def path = '/tmp/reset_pwd.sh'
+                    writeFile file: path, text: scriptContent
+                    sh "chmod +x ${path}"
+                    sshagent(['nnt-env-ssh-credentials']) {
+                        sh "scp -i /root/.ssh/id_rsa ${path} root@139.84.135.9:${path}"
+                        sh "ssh -i /root/.ssh/id_rsa root@139.84.135.9 '${path}'"
+                    }
+                }
+            }
+        }
     }
 }

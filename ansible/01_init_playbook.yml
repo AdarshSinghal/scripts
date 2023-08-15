@@ -9,6 +9,10 @@
       debug:
         msg: "Hello, Ansible is starting configuring the environment."
 
+    - fail:
+        msg: "Environment variable PG_PASSWORD is not set in the jenkins/container. Please set it before running the playbook."
+      when: lookup('env', 'PG_PASSWORD')|length == 0
+
     - name: Update apt cache
       apt:
         update_cache: yes
