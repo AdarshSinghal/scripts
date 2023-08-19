@@ -1,22 +1,19 @@
 #!/bin/bash
 
-##### Started -> Logging setup #####
+######################### Logging setup #########################
 LOG_DIR=/var/log/my_script_logs
 INSTALLATION_LOG_FILE=$LOG_DIR/installation.log
 
 # Check if LOG_DIR is already defined in ~/.bashrc
-
 if ! [ -d "$LOG_DIR" ]; then
-  sudo mkdir $LOG_DIR
+  mkdir $LOG_DIR
   {
     echo "export LOG_DIR=$LOG_DIR"
     echo "export INSTALLATION_LOG_FILE=$INSTALLATION_LOG_FILE"
   } >> ~/.bashrc
   . ~/.bashrc
 fi
-
-
-##### Completed -> Logging setup #####
+######################### Logging setup #########################
 
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Starting boot script execution with apt update." >> $INSTALLATION_LOG_FILE
 apt-get update
@@ -56,8 +53,8 @@ else
     echo "$(date +'%Y-%m-%d %H:%M:%S') - Git repository has been cloned into $SCRIPTS_DIR" >> $INSTALLATION_LOG_FILE
 fi
 
-#Execute the installation.sh script
-SCRIPT_INSTALLATION=$SCRIPTS_DIR/server/ubuntu/aws/devtools/installation.sh
+#Execute the 02-installation.sh script
+SCRIPT_INSTALLATION=$SCRIPTS_DIR/server/ubuntu/aws/devtools/02-installation.sh
 chmod +x $SCRIPT_INSTALLATION
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Executing $SCRIPT_INSTALLATION" >> $INSTALLATION_LOG_FILE
 source $SCRIPT_INSTALLATION

@@ -13,11 +13,11 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Executing apt update" >> "$INSTALLATION_LOG_FILE"
-sudo apt update
+apt-get update
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Installing jenkins" >> "$INSTALLATION_LOG_FILE"
-sudo apt install jenkins -y
+apt-get install jenkins -y
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Installing nginx" >> "$INSTALLATION_LOG_FILE"
-sudo apt install nginx -y
+apt-get install nginx -y
 echo "$(date +'%Y-%m-%d %H:%M:%S') - Finished installing jenkins and nginx" >> "$INSTALLATION_LOG_FILE"
 
 echo "******$(date +'%Y-%m-%d %H:%M:%S') - Inside installation-jenkins-nginx ENV_SCRIPT_DIR - $ENV_SCRIPT_DIR." >> "$INSTALLATION_LOG_FILE"

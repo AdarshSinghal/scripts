@@ -24,7 +24,7 @@ if ! [ -e "$JENKINS_SERVICE_D/override.conf" ]; then
   echo "$(date +'%Y-%m-%d %H:%M:%S') - Not found $JENKINS_SERVICE_D/override.conf. Hence, creating." >> "$INSTALLATION_LOG_FILE"
   {
     echo "[Service]"
-    echo "Environment='JENKINS_PREFIX=/devtools/jenkins'"
+    echo "Environment='JENKINS_PREFIX=/jenkins'"
   } >> $JENKINS_SERVICE_D/override.conf
 else
   echo "$(date +'%Y-%m-%d %H:%M:%S') - Found $JENKINS_SERVICE_D/override.conf. Need to check whether Jenkins_Prefix present" >> "$INSTALLATION_LOG_FILE"
@@ -32,7 +32,7 @@ else
     echo "$(date +'%Y-%m-%d %H:%M:%S') - Jenkins Prefix not found in override.conf. Hence, writing." >> "$INSTALLATION_LOG_FILE"
     {
     echo "[Service]"
-    echo "Environment='JENKINS_PREFIX=/devtools/jenkins'"
+    echo "Environment='JENKINS_PREFIX=/jenkins'"
     } >> $JENKINS_SERVICE_D/override.conf
   fi
 fi
