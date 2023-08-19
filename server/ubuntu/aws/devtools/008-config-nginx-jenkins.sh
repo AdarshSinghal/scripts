@@ -25,6 +25,7 @@ else
 fi
 
 #git clone or git pull, depends on repository existence in script_dir
+cd script_dir || exit
 if [ -d "$script_dir/.git" ]; then
   git restore .
   if git pull; then
