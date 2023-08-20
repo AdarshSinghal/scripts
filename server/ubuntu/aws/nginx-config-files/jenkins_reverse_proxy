@@ -1,6 +1,6 @@
 upstream jenkins {
   keepalive 32; # keepalive connections
-  server 127.0.0.1:8080; # jenkins ip and port
+  server 127.0.0.1:9000; # jenkins ip and port
 }
 
 # Required for Jenkins websocket agents
@@ -11,18 +11,17 @@ map $http_upgrade $connection_upgrade {
 
 server {
     listen 80;
-    server_name devtools.notnulltech.com;
+    server_name jenkins.notnulltech.com;
 
     # Redirect HTTP to HTTPS
     return 301 https://$host$request_uri;
 }
 
-
 server {
-  listen          443 ssl;       # Listen on port 80 for IPv4 requests
-  server_name     devtools.notnulltech.com;
-  ssl_certificate /etc/letsencrypt/live/notnulltech.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/notnulltech.com/privkey.pem;
+    listen 443 ssl;
+    server_name jenkins.notnulltech.com;
+  ssl_certificate /usr/local/work-dir/ssl-certificate/certificate.crt;
+  ssl_certificate_key /usr/local/work-dir/ssl-certificate/private.key;
 
 
   # this is the jenkins web root directory
@@ -53,10 +52,7 @@ server {
     sendfile on;
   }
 
-  location /jenkins {
-	allow 106.51.161.120;
-	allow 106.51.165.17;
-	deny all;
+  location / {
       sendfile off;
       proxy_pass         http://jenkins;
       proxy_redirect     default;
