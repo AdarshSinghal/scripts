@@ -1,0 +1,15 @@
+[Unit]
+Description=NNT Backend Spring Boot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Restart=always
+RestartSec=60
+SuccessExitStatus=143
+EnvironmentFile=/var/www/nnt-be/.env
+ExecStart=java -Dspring.profiles.active=prod -jar /var/www/nnt-be/nnt-be-core.jar
+
+[Install]
+WantedBy=multi-user.target
