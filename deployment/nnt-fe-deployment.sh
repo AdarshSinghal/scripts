@@ -44,7 +44,6 @@ unzipLatestDeploymentFile() {
   else
     log "Unzip failed"
     exit 1
-    #TODO - Automate fallback to previous deployment
   fi
 }
 
