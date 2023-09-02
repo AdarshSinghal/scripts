@@ -1,6 +1,6 @@
 upstream nntApi {
   keepalive 128; # keepalive connections
-  server 127.0.0.1:8080; # nnt backend ip and port
+  server 127.0.0.1:8090; # nnt backend ip and port
 }
 
 server {
