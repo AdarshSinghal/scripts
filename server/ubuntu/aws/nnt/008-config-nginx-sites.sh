@@ -40,7 +40,7 @@ fi
 ########################### Git setup ############################
 
 # Define source and destination directories
-dir1="$SCRIPTS_DIR/server/ubuntu/aws/devtools/nginx-config-files"
+dir1="$SCRIPTS_DIR/server/ubuntu/aws/nginx-config-files"
 sites_available="/etc/nginx/sites-available/"
 sites_enabled="/etc/nginx/sites-enabled/"
 log "Copying all files from $dir1 to $sites_available"
