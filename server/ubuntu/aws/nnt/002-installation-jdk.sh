@@ -11,11 +11,13 @@ log() {
 ######################### Logging setup #########################
 
 log "*** Started execution - installation-jdk.sh ***"
-apt install openjdk-17-jdk -y
+apt install -y git curl gpg wget ca-certificates git sudo maven zip unzip libcap2-bin apt-file
+apt-file update
+apt install openjdk-21-jdk -y
 log "jdk installation finished. Now setting env variable."
 
 #Set env variable
-java_home="JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64"
+java_home="JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64"
 if grep -q "^$java_home" /etc/environment; then
   log "JAVA_HOME is already present in /etc/environment."
 else
