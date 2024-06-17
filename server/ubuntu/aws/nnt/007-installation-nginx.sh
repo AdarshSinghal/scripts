@@ -10,6 +10,6 @@ log() {
 }
 ######################### Logging setup #########################
 
-echo "$(date +'%Y-%m-%d %H:%M:%S') - nginx installation started" >> "$INSTALLATION_LOG_FILE"
-apt-get install nginx -y
-echo "$(date +'%Y-%m-%d %H:%M:%S') - nginx installation finished" >> "$INSTALLATION_LOG_FILE"
+log "$(date +'%Y-%m-%d %H:%M:%S') - nginx installation started"
+apt install nginx -y
+log "$(date +'%Y-%m-%d %H:%M:%S') - nginx installation finished"
